@@ -1,7 +1,7 @@
 OPENRESTY_VERSION ?= 1.19.9.1
 LUAROCKS_VERSION ?= 3.7.0
 
-build: build-heroku-18 build-heroku-20
+build: build-heroku-18 build-heroku-20 build-heroku-22
 
 build-heroku-18:
 	@echo "Building OpenResty in Docker for heroku-18 ..."
@@ -23,6 +23,10 @@ shell-heroku-18:
 shell-heroku-20:
 	@echo "Start a Docker shell for heroku-20 ..."
 	@docker run -v $(shell pwd):/buildpack --rm -it -e "STACK=heroku-20" -w /buildpack heroku/heroku:20-build bash
+
+shell-heroku-22:
+	@echo "Start a Docker shell for heroku-22 ..."
+	@docker run -v $(shell pwd):/buildpack --rm -it -e "STACK=heroku-22" -w /buildpack heroku/heroku:22-build bash
 
 release:
 	git commit -a -m "Rebuilding stacks"
