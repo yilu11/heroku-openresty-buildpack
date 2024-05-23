@@ -15,4 +15,4 @@ if [[ -f "$HOME/nginx.conf" ]]; then
 fi
 
 
-exec "$OPENRESTY_BIN" -p "&NGINX_DIR"  -c "$DEST_NGINX_CONF"
+exec "$OPENRESTY_BIN" -p "$NGINX_DIR"  -c "$DEST_NGINX_CONF"
