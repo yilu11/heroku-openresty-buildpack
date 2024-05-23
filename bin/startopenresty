@@ -54,4 +54,5 @@ EOF
 }
 
 mv "$TEST_NGINX_CONF" "$DEST_NGINX_CONF"
+export LD_LIBRARY_PATH=$HOME/openresty/luajit/lib:$HOME/openresty/pcre/lib:$HOME/openresty/openssl111/lib
 exec "$OPENRESTY_BIN" -c "$DEST_NGINX_CONF"
