@@ -3,6 +3,7 @@ set -euo pipefail
 
 OPENRESTY_DIR="$HOME/openresty"
 OPENRESTY_BIN="$OPENRESTY_DIR/bin/openresty"
+LUA_DIR="$OPENRESTY_DIR/lualib"
 NGINX_CONF_DIR="$OPENRESTY_DIR/nginx/conf"
 SOURCE_NGINX_CONF="$NGINX_CONF_DIR/nginx.conf.default"
 DEST_NGINX_CONF="$NGINX_CONF_DIR/nginx.conf"
@@ -54,4 +55,5 @@ EOF
 }
 
 mv "$TEST_NGINX_CONF" "$DEST_NGINX_CONF"
+cd "$LUA_DIR"
 exec "$OPENRESTY_BIN" -c "$DEST_NGINX_CONF"
