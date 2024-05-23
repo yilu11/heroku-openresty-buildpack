@@ -74,5 +74,11 @@ if [[ -f $BUILD_DIR/nginx/conf/nginx.conf ]]; then
 else
 	echo '-----> nginx-buildpack: Custom nginx.conf not found in config.'
 fi
+if [[ -f $BUILD_DIR/lualib/http_sig/sign_response.lua ]]; then
+	cp "$BUILD_DIR/lualib/http_sig/sign_response.lua" "$BUILD_DIR/openresty/lualib/http_sig/sign_response.lua"
+	echo '-----> nginx-buildpack: copy sign_response.lua to app/openresty/lualib/http_sig/sign_response.lua'
+else
+	echo '-----> nginx-buildpack: Custom sign_response.lua not found in lualib/http_sig.'
+fi
 rm -f /app/openresty
 export PATH="$OLD_PATH"
