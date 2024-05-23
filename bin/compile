@@ -64,7 +64,7 @@ if [[ -f "$BUILD_DIR/luarocks.txt" ]]; then
   fi
 fi
 if [[ -f $BUILD_DIR/config/nginx.conf ]]; then
-	cp "$BUILD_DIR/config/nginx.conf" "$BUILD_DIR/openresty/nginx/config/nginx.conf"
+	cp "$BUILD_DIR/config/nginx.conf" "$BUILD_DIR/openresty/nginx/conf/nginx.conf"
 	echo '-----> nginx-buildpack: copy nginx.conf to app/openresty/nginx/config/nginx.conf'
 else
 	echo '-----> nginx-buildpack: Custom nginx.conf not found in config.'
