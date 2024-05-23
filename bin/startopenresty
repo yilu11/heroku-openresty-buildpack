@@ -8,11 +8,26 @@ NGINX_DIR="$OPENRESTY_DIR/nginx"
 SOURCE_NGINX_CONF="$NGINX_CONF_DIR/nginx.conf.default"
 DEST_NGINX_CONF="$NGINX_CONF_DIR/nginx.conf"
 
-# If there's an nginx.conf in the root of the project directory
-# then it will be used instead of the default nginx.conf
-if [[ -f "$HOME/nginx.conf" ]]; then
-  SOURCE_NGINX_CONF="$HOME/nginx.conf"
-fi
+TEST_NGINX_CONF="$(mktemp --tmpdir="$NGINX_CONF_DIR" --suffix=-nginx.conf.test)"
 
+cat <<- EOF | python - "$DEST_NGINX_CONF" > "$TEST_NGINX_CONF"
+import sys
+from os import environ
+from jinja2 import Template
 
+with open(sys.argv[1]) as f:
+  content = f.read()
+
+  try:
+    template = Template(content)
+    rendered = template.render(env=environ, **environ)
+    sys.stdout.write(rendered)
+  except:
+    for i, line in enumerate(content.splitlines(), start=1):
+      sys.stderr.write("{0:>4}: {1}\n".format(i, line))
+
+    raise
+EOF
+
+mv "$TEST_NGINX_CONF" "$DEST_NGINX_CONF"
 exec "$OPENRESTY_BIN" -p "$NGINX_DIR"  -c "$DEST_NGINX_CONF"
