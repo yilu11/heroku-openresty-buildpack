@@ -10,10 +10,7 @@ ENV_DIR="$3"
 echo "-----> Installing OpenResty ..."
 tar -zxf "dist/openresty-$STACK".tar.gz -C "$BUILD_DIR"
 cp -a conf/nginx.conf.default "$BUILD_DIR/openresty/nginx/conf"
-cp -a bin/startopenresty "$BUILD_DIR/openresty/bin"
-
-cp bin/startopenresty "$BUILD_DIR/bin/"
-echo '-----> nginx-buildpack: Added startopenresty to app/bin'
+cp -a bin/startopenresty "$BUILD_DIR/bin"
 
 # Add a profile.d script to add openresty tools and luarocks to PATH
 mkdir -p "$BUILD_DIR/.profile.d"
