@@ -7,7 +7,6 @@ NGINX_CONF_DIR="$OPENRESTY_DIR/nginx/conf"
 NGINX_DIR="$OPENRESTY_DIR/nginx"
 SOURCE_NGINX_CONF="$NGINX_CONF_DIR/nginx.conf.default"
 DEST_NGINX_CONF="$NGINX_CONF_DIR/nginx.conf"
-DEST_NGINX_CONF2="$NGINX_CONF_DIR/nginx2.conf"
 
 TEST_NGINX_CONF="$(mktemp --tmpdir="$NGINX_CONF_DIR" --suffix=-nginx.conf.test)"
 
@@ -30,5 +29,5 @@ with open(sys.argv[1]) as f:
     raise
 EOF
 
-mv "$TEST_NGINX_CONF" "$DEST_NGINX_CONF2"
-exec "$OPENRESTY_BIN" -p "$NGINX_DIR"  -c "$DEST_NGINX_CONF2"
+mv "$TEST_NGINX_CONF" "$DEST_NGINX_CONF"
+exec "$OPENRESTY_BIN" -p "$NGINX_DIR"  -c "$DEST_NGINX_CONF"
