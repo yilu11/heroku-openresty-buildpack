@@ -80,5 +80,23 @@ if [[ -f $BUILD_DIR/lualib/http_sig/sign_response.lua ]]; then
 else
 	echo '-----> nginx-buildpack: Custom sign_response.lua not found in lualib/http_sig.'
 fi
+if [[ -f $BUILD_DIR/lualib/http_sig/hmac.lua ]]; then
+	cp "$BUILD_DIR/lualib/http_sig/hmac.lua" "$BUILD_DIR/openresty/lualib/http_sig/hmac.lua"
+	echo '-----> nginx-buildpack: copy hmac.lua to app/openresty/lualib/http_sig/hmac.lua'
+else
+	echo '-----> nginx-buildpack: Custom hmac.lua not found in lualib/http_sig.'
+fi
+if [[ -f $BUILD_DIR/lualib/http_sig/rsa.lua ]]; then
+	cp "$BUILD_DIR/lualib/http_sig/rsa.lua" "$BUILD_DIR/openresty/lualib/http_sig/rsa.lua"
+	echo '-----> nginx-buildpack: copy rsa.lua to app/openresty/lualib/http_sig/rsa.lua'
+else
+	echo '-----> nginx-buildpack: Custom rsa.lua not found in lualib/http_sig.'
+fi
+if [[ -f $BUILD_DIR/nginx/https_cert/test.alux.fun/privkey.pem ]]; then
+	cp "$BUILD_DIR/nginx/https_cert/test.alux.fun/privkey.pem" "$BUILD_DIR/openresty/nginx/https_cert/test.alux.fun/privkey.pem"
+	echo '-----> nginx-buildpack: copy test.alux.fun/privkey.pem to app/openresty/nginx/https_cert/test.alux.fun/privkey.pem'
+else
+	echo '-----> nginx-buildpack: Custom test.alux.fun/privkey.pem not found in lualib/http_sig.'
+fi
 rm -f /app/openresty
 export PATH="$OLD_PATH"
