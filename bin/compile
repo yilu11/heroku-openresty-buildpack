@@ -64,15 +64,15 @@ if [[ -f "$BUILD_DIR/luarocks.txt" ]]; then
     tar -zcf "$CACHE_DIR/luarocks-${chksum}.tar.gz" -C "$BUILD_DIR/openresty/luarocks" .
   fi
 fi
-cp -rf "$BUILD_DIR/nginx/*" "$BUILD_DIR/openresty/nginx/"
-echo '-----> nginx-buildpack: copy nginx to app/openresty/nginx/'
-cp -rf "$BUILD_DIR/lualib/*" "$BUILD_DIR/openresty/lualib/"
-echo '-----> nginx-buildpack: copy lualib to app/openresty/lualib/'
-# if [[ -f $BUILD_DIR/config/nginx.conf ]]; then
-	# cp "$BUILD_DIR/config/nginx.conf" "$BUILD_DIR/openresty/nginx/conf/nginx.conf"
-	# echo '-----> nginx-buildpack: copy nginx.conf to app/openresty/nginx/config/nginx.conf'
-# else
-	# echo '-----> nginx-buildpack: Custom nginx.conf not found in config.'
-# fi
+# cp -rf "$BUILD_DIR/nginx/*" "$BUILD_DIR/openresty/nginx/"
+# echo '-----> nginx-buildpack: copy nginx to app/openresty/nginx/'
+# cp -rf "$BUILD_DIR/lualib/*" "$BUILD_DIR/openresty/lualib/"
+# echo '-----> nginx-buildpack: copy lualib to app/openresty/lualib/'
+if [[ -f $BUILD_DIR/nginx/conf/nginx.conf ]]; then
+	cp "$BUILD_DIR/nginx/conf/nginx.conf" "$BUILD_DIR/openresty/nginx/conf/nginx.conf"
+	echo '-----> nginx-buildpack: copy nginx.conf to app/openresty/nginx/config/nginx.conf'
+else
+	echo '-----> nginx-buildpack: Custom nginx.conf not found in config.'
+fi
 rm -f /app/openresty
 export PATH="$OLD_PATH"
