@@ -2,7 +2,7 @@
 set -euo pipefail
 
 OPENRESTY_DIR="$HOME/openresty"
-OPENRESTY_BIN="$OPENRESTY_DIR/bin/openresty"
+OPENRESTY_BIN="$OPENRESTY_DIR/nginx/sbin/nginx"
 NGINX_CONF_DIR="$OPENRESTY_DIR/nginx/conf"
 SOURCE_NGINX_CONF="$NGINX_CONF_DIR/nginx.conf.default"
 DEST_NGINX_CONF="$NGINX_CONF_DIR/nginx.conf"
