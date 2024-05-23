@@ -2,6 +2,7 @@
 set -euo pipefail
 
 OPENRESTY_DIR="$HOME/openresty"
+LUA_DIR="$OPENRESTY_DIR/lualib"
 OPENRESTY_BIN="$OPENRESTY_DIR/nginx/sbin/nginx"
 NGINX_CONF_DIR="$OPENRESTY_DIR/nginx/conf"
 NGINX_DIR="$OPENRESTY_DIR/nginx"
@@ -30,4 +31,5 @@ with open(sys.argv[1]) as f:
 EOF
 
 mv "$TEST_NGINX_CONF" "$DEST_NGINX_CONF"
+cd "$LUA_DIR"
 exec "$OPENRESTY_BIN" -p "$NGINX_DIR"  -c "$DEST_NGINX_CONF"
